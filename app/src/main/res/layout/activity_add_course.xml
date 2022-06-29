@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+tools:context=".ui.add.AddCourseActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/layout_name_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/course_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_name_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="255"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/add_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/day"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_name_course"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_relative"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/add_day">
+
+        <ImageButton
+            android:id="@+id/add_start_time"
+            style="@style/Base.Widget.AppCompat.ImageButton"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:contentDescription="@string/start_time"
+            android:onClick="showStartTimePicker"
+            android:src="@drawable/ic_time" />
+
+        <TextView
+            android:id="@+id/hint_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_toEndOf="@id/add_start_time"
+            android:gravity="center_vertical"
+            android:text="@string/start_time"/>
+
+        <TextView
+            android:id="@+id/add_hint_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hint_start_time"
+            android:layout_toEndOf="@id/add_start_time"
+            android:gravity="center_vertical"
+            tools:text="@string/start_time" />
+
+        <ImageButton
+            android:id="@+id/add_end_time"
+            style="@style/Base.Widget.AppCompat.ImageButton"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:layout_toEndOf="@id/hint_start_time"
+            android:contentDescription="@string/end_time"
+            android:onClick="showEndTimePicker"
+            android:src="@drawable/ic_time" />
+
+        <TextView
+            android:id="@+id/hint_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_toEndOf="@id/add_end_time"
+            android:gravity="center_vertical"
+            android:text="@string/end_time"/>
+
+        <TextView
+            android:id="@+id/add_hint_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hint_end_time"
+            android:layout_toEndOf="@id/add_end_time"
+            android:gravity="center_vertical"
+            tools:text="@string/end_time" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_lecturer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lecturer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_relative">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_name_lecturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="255"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_note"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_lecturer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:lines="4" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

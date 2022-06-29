@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.courseschedule.R
 import com.dicoding.courseschedule.data.Course
+import com.dicoding.courseschedule.databinding.ActivityListBinding
 import com.dicoding.courseschedule.paging.CourseAdapter
 import com.dicoding.courseschedule.paging.CourseViewHolder
+import com.dicoding.courseschedule.ui.add.AddCourseActivity
+import com.dicoding.courseschedule.ui.detail.DetailActivity
 import com.dicoding.courseschedule.ui.setting.SettingsActivity
 import com.dicoding.courseschedule.util.SortType
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListActivity : AppCompatActivity() {
 
@@ -50,6 +54,9 @@ class ListActivity : AppCompatActivity() {
 
     private fun onCourseClick(course: Course) {
         //TODO 8 : Intent and show detailed course
+        val moveIntent = Intent(this@ListActivity, DetailActivity::class.java)
+        moveIntent.putExtra(DetailActivity.COURSE_ID, course.id)
+        startActivity(moveIntent)
     }
 
     private fun initAction() {
@@ -69,6 +76,11 @@ class ListActivity : AppCompatActivity() {
 
     private fun setFabClick() {
         //TODO 9 : Create AddCourseActivity to set new course schedule
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener { view ->
+            val moveIntent = Intent(this@ListActivity, AddCourseActivity::class.java)
+            startActivity(moveIntent)
+        }
     }
 
     //TODO 14 : Fixing bug : sort menu not show and course not deleted when list is swiped
@@ -99,6 +111,7 @@ class ListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_sort -> {
+                showSortMenu()
                 true
             }
             R.id.action_settings -> {
@@ -129,7 +142,7 @@ class ListActivity : AppCompatActivity() {
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val course = (viewHolder as CourseViewHolder).getCourse()
-
+            viewModel.delete(course)
         }
     }
 }

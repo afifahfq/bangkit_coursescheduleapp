@@ -7,8 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.dicoding.courseschedule.R
 import com.dicoding.courseschedule.data.Course
+import com.dicoding.courseschedule.data.DataRepository
+import com.dicoding.courseschedule.ui.add.AddCourseActivity
+import com.dicoding.courseschedule.ui.list.ListActivity
 import com.dicoding.courseschedule.ui.setting.SettingsActivity
 import com.dicoding.courseschedule.util.DayName
 import com.dicoding.courseschedule.util.QueryType
@@ -26,6 +30,17 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         supportActionBar?.title = resources.getString(R.string.today_schedule)
 
+        //TODO 99 : diff
+        val repository = DataRepository.getInstance(this)
+        val courses = repository?.getNearestSchedule(QueryType.CURRENT_DAY)
+
+        viewModel = HomeViewModel(repository!!)
+
+        val courseObserver = Observer<Course?> { aCourse ->
+            showTodaySchedule(aCourse)
+        }
+        courses!!.observe(this, courseObserver)
+
     }
 
     private fun showTodaySchedule(course: Course?) {
@@ -36,6 +51,12 @@ class HomeActivity : AppCompatActivity() {
             val remainingTime = timeDifference(day, startTime)
 
             val cardHome = findViewById<CardHomeView>(R.id.view_home)
+
+            cardHome.setCourseName(course.courseName)
+            cardHome.setTime(time)
+            cardHome.setRemainingTime(remainingTime)
+            cardHome.setLecturer(course.lecturer)
+            cardHome.setNote(course.note)
 
         }
 
@@ -64,6 +85,8 @@ class HomeActivity : AppCompatActivity() {
         val intent: Intent = when (item.itemId) {
 
             R.id.action_settings -> Intent(this, SettingsActivity::class.java)
+            R.id.action_list -> Intent(this, ListActivity::class.java)
+            R.id.action_add -> Intent(this, AddCourseActivity::class.java)
             else -> null
         } ?: return super.onOptionsItemSelected(item)
 
