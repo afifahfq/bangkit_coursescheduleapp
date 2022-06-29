@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.dicoding.courseschedule.util.*
+import com.dicoding.courseschedule.util.QueryType
+import com.dicoding.courseschedule.util.QueryUtil
+import com.dicoding.courseschedule.util.SortType
+import com.dicoding.courseschedule.util.executeThread
 import java.util.*
 
 //TODO 4 : Implement repository with appropriate dao
@@ -36,7 +39,6 @@ class DataRepository(private val dao: CourseDao) {
     }
 
     fun getTodaySchedule() : List<Course> {
-        //TODO 99 : diff
         val calendar = Calendar.getInstance()
         val day = calendar[Calendar.DAY_OF_WEEK]
 

@@ -30,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         supportActionBar?.title = resources.getString(R.string.today_schedule)
 
-        //TODO 99 : diff
         val repository = DataRepository.getInstance(this)
         val courses = repository?.getNearestSchedule(QueryType.CURRENT_DAY)
 
